@@ -7,17 +7,17 @@
   - name: Stop running instance
     ignore_errors: yes
     docker_container:
-      name: rccl_jenkins
+      name: "{{ container_name }}"
       state: stopped
 
   - name: Remove running instance
     docker_container:
-      name: rccl_jenkins
+      name: "{{ container_name }}"
       state: absent
 
   - name: Remove existing image
     docker_image:
-      name: rccl_jenkins
+      name: "{{ container_name }}"
       state: absent
       force: yes
 
