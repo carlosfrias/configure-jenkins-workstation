@@ -11,21 +11,30 @@
     with_items:
     - docker-py
 
+  - name: Obtain ssh credentials
+    fetch:
+      src: ~/.ssh/{{ item }}
+      dest: docker/ssh/{{ item }}
+      flat: yes
+    with_items:
+    - id_rsa
+    - id_rsa.pub
+
 - name: Clear a running instance and old images
   include: jenkins-teardown.yml
 
-- name: Build Jenkins server
+- name: Build Jenkins Container
   hosts: localhost
   gather_facts: no
   connection: local
   tasks:
-  - name: Build Jenkins image
+  - name: Build Jenkins Image
     docker_image:
       name: "{{ container_name }}"
       state: present
       path: ./docker
 
-  - name: Create a data container
+  - name: Run Jenkins Container
     docker_container:
       name: "{{ container_name }}"
       image: "{{ image_name | default(container_name) }}"
@@ -37,7 +46,7 @@
 
   - name: Wait for Jenkins to startup
     wait_for:
-      timeout: 15
+      timeout: 30
 
 - name: Retrieve initial admin password
   include: jenkins-initial-admin-password.yml
