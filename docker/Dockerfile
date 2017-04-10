@@ -8,6 +8,9 @@ COPY ./maven.groovy /usr/share/jenkins/ref/plugin_config/maven.groovy
 COPY ./gitScm.groovy /usr/share/jenkins/ref/plugin_config/gitScm.groovy
 
 USER root
+RUN apt-get install -y maven
+RUN /bin/chmod 0400 /usr/share/jenkins/ref/.ssh/id_rsa
+RUN /bin/chmod 0400 /usr/share/jenkins/ref/.ssh/id_rsa.pub
 RUN /bin/chown jenkins /usr/share/jenkins/ref/.ssh/id_rsa
 RUN /bin/chown jenkins /usr/share/jenkins/ref/.ssh/id_rsa.pub
 RUN /bin/chown jenkins /usr/share/jenkins/ref/jenkins_plugins.txt

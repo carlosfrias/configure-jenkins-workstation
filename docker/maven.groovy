@@ -1,6 +1,7 @@
 
 import hudson.tasks.*
 import hudson.tasks.Maven.*
+import jenkins.model.*
 
 configPrefixMessage = "CUSTOM CONFIGURATION"
 
