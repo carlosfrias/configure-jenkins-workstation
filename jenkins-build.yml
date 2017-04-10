@@ -1,0 +1,45 @@
+---
+- name: Build Jenkins server
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  tasks:
+  - name: Install modules
+    pip:
+      name: "{{ item }}"
+      state: present
+    with_items:
+    - docker-py
+
+  - name: Stop running instance
+    ignore_errors: yes
+    docker_container:
+      name: "{{ container_name }}"
+      state: stopped
+
+  - name: Remove running instance
+    docker_container:
+      name: "{{ container_name }}"
+      state: absent
+
+  - name: Remove existing image
+    docker_image:
+      name: "{{ container_name }}"
+      state: absent
+      force: yes
+
+  - name: Build jenkins image
+    docker_image:
+      name: "{{ container_name }}"
+      state: present
+      path: ./docker
+
+  - name: Create a data container
+    docker_container:
+      name: "{{ container_name }}"
+      image: "{{ image_name }}"
+      recreate: yes
+      restart: yes
+      force_kill: yes
+      ports:
+      - "8080:8080"

@@ -1,0 +1,98 @@
+---
+- name: Configure an API workstations
+  hosts: localhost
+  connection: local
+  become: yes
+  vars:
+    download_node: https://nodejs.org/dist/
+    node_version: v6.10.2
+    node_package_name: "node-{{ node_version }}-linux-x64"
+    node_archive: "{{ node_package_name }}.tar.xz"
+  vars_prompt:
+    - name: 'reboot'
+      prompt: "You will need a reboot, do you want to reboot at the end of this script? (y/n)"
+  tasks:
+  - name: Install packages with apt
+    apt:
+      name: "{{ item }}"
+      state: latest
+      update_cache: yes
+    with_items:
+    - maven
+    - docker-engine
+
+  - name: Create folders for node
+    become: no
+    file:
+      path: "{{ item }}"
+      state: directory
+    with_items:
+    - "~/apps"
+    - "~/bin"
+
+  - name: Download node
+    become: no
+    get_url:
+      url: "{{ download_node }}/{{ node_version }}/{{ node_archive }}"
+      dest: "~/apps/{{ node_archive }}"
+
+  - name: Unarchive node package
+    become: no
+    unarchive:
+      src: "~/apps/{{ node_archive }}"
+      dest: ~/apps
+      remote_src: True
+
+  - name: Update path
+    become: no
+    lineinfile:
+      dest: "~/.bashrc"
+      line: "export PATH=$PATH:~/apps/{{ node_package_name }}/bin"
+      state: present
+
+  - name: Stop docker service
+    service:
+      name: docker
+      state: stopped
+
+  - name: Down ifconfig on docker0
+    ignore_errors: yes
+    shell: ifconfig docker0 down
+
+  - name: Delete docker0 ip link
+    ignore_errors: yes
+    shell: ip link del docker0
+
+  - name: Avoid conflicts between the Docker bridge and Corp IPs.
+    lineinfile:
+      dest: /etc/default/docker
+      line: 'DOCKER_OPTS="${DOCKER_OPTS} --bip=192.168.9.1/24"'
+      regexp: '^DOCKER_OPTS=.*'
+      state: present
+
+  - name: Avoid conflicts between the Docker bridge and Corp IPs.
+    lineinfile:
+      dest: /etc/default/docker
+      line: 'DOCKER_OPTS="${DOCKER_OPTS} --graph=/usr/local/google/docker"'
+      insertafter: '^DOCKER_OPTS="${DOCKER_OPTS} --bip=192.168.9.1/24"'
+      state: present
+
+  - name: Add current user to docker group
+    user:
+      name: "{{ ansible_user_id }}"
+      shell: /bin/bash
+      groups: docker
+      append: yes
+
+  - name: Start docker service
+    service:
+      name: docker
+      state: started
+
+  - name: Reboot node
+    shell: reboot now
+    async: 0
+    poll: 0
+    when: reboot == 'y'
+
+

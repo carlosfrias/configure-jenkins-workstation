@@ -1,0 +1,24 @@
+---
+- name: Teardown jenkins server
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+  - name: Stop running instance
+    ignore_errors: yes
+    docker_container:
+      name: rccl_jenkins
+      state: stopped
+
+  - name: Remove running instance
+    docker_container:
+      name: rccl_jenkins
+      state: absent
+
+  - name: Remove existing image
+    docker_image:
+      name: rccl_jenkins
+      state: absent
+      force: yes
+
+
