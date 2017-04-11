@@ -1,0 +1,48 @@
+---
+- name: Configure an API workstations
+  hosts: localhost
+  connection: local
+  become: yes
+  vars:
+    download_node: https://nodejs.org/dist/
+    node_version: v6.10.2
+    node_package_name: "node-{{ node_version }}-linux-x64"
+    node_archive: "{{ node_package_name }}.tar.xz"
+  tasks:
+  - name: Install packages with apt
+    apt:
+      name: "{{ item }}"
+      state: latest
+      update_cache: yes
+    with_items:
+    - maven
+
+  - name: Create folders for node
+    become: no
+    file:
+      path: "{{ item }}"
+      state: directory
+    with_items:
+    - "~/apps"
+    - "~/bin"
+
+  - name: Download node
+    become: no
+    get_url:
+      url: "{{ download_node }}/{{ node_version }}/{{ node_archive }}"
+      dest: "~/apps/{{ node_archive }}"
+
+  - name: Unarchive node package
+    become: no
+    unarchive:
+      src: "~/apps/{{ node_archive }}"
+      dest: ~/apps
+      remote_src: True
+
+  - name: Update path
+    become: no
+    lineinfile:
+      dest: "~/.bashrc"
+      line: "export PATH=$PATH:~/apps/{{ node_package_name }}/bin"
+      state: present
+

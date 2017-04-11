@@ -19,19 +19,33 @@
     with_items:
     - id_rsa
     - id_rsa.pub
+    - known_hosts
 
 - name: Clear a running instance and old images
-  include: jenkins-teardown.yml
+  include: jenkins-docker-teardown.yml
+
 
 - name: Build Jenkins Container
   hosts: localhost
   gather_facts: no
   connection: local
+  vars:
+    download_node: https://nodejs.org/dist/
+    node_version: v6.10.2
+    node_package_name: "node-{{ node_version }}-linux-x64"
+    node_archive: "{{ node_package_name }}.tar.xz"
   tasks:
+  - name: Download node
+    become: no
+    get_url:
+      url: "{{ download_node }}/{{ node_version }}/{{ node_archive }}"
+      dest: "docker/{{ node_archive }}"
+
   - name: Build Jenkins Image
     docker_image:
       name: "{{ container_name }}"
       state: present
+      rm: true
       path: ./docker
 
   - name: Run Jenkins Container
@@ -49,4 +63,4 @@
       timeout: 30
 
 - name: Retrieve initial admin password
-  include: jenkins-initial-admin-password.yml
+  include: jenkins-docker-initial-password.yml
