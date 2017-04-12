@@ -7,26 +7,26 @@
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
-          <name>APIGEE_ORG</name>
+          <name>org</name>
           <description></description>
           <defaultValue>friasc</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
-          <name>APIGEE_USERNAME</name>
+          <name>username</name>
           <description></description>
           <defaultValue>friasc@google.com</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.PasswordParameterDefinition>
-          <name>APIGEE_PASSWORD</name>
+          <name>password</name>
           <description></description>
         </hudson.model.PasswordParameterDefinition>
         <hudson.model.StringParameterDefinition>
-          <name>DEPLOYMENT_SUFFIX</name>
+          <name>deployment_suffix</name>
           <description></description>
           <defaultValue>jenkins_pipeline</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
-          <name>PROFILE</name>
+          <name>profile</name>
           <description></description>
           <defaultValue>test</defaultValue>
         </hudson.model.StringParameterDefinition>
