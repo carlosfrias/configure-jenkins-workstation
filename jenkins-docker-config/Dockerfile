@@ -1,15 +1,15 @@
-# TODO Test with version 2.32.2 which is used by RCCL
-FROM jenkins:2.46.1
+FROM jenkins:2.32.2
 
 USER root
 RUN apt-get update -y
 RUN apt-get install -y tree maven git
 COPY ssh/ /usr/share/jenkins/ref/.ssh
-COPY ./jenkins_plugins.txt /usr/share/jenkins/ref
-COPY ./init.groovy /usr/share/jenkins/ref/init.groovy
-COPY ./credentials.groovy /usr/share/jenkins/ref/plugin_config/credentials.groovy
-COPY ./maven.groovy /usr/share/jenkins/ref/plugin_config/maven.groovy
-COPY ./gitScm.groovy /usr/share/jenkins/ref/plugin_config/gitScm.groovy
+COPY ./jenkins-init/jenkins_plugins.txt /usr/share/jenkins/ref
+COPY ./jenkins-init/init.groovy /usr/share/jenkins/ref/init.groovy
+COPY ./jenkins-init/credentials.groovy /usr/share/jenkins/ref/plugin_config/credentials.groovy
+COPY ./jenkins-init/maven.groovy /usr/share/jenkins/ref/plugin_config/maven.groovy
+COPY ./jenkins-init/gitScm.groovy /usr/share/jenkins/ref/plugin_config/gitScm.groovy
+COPY ./jobs-init/test-ci-pipeline.xml /usr/share/jenkins/ref/jobs/ci-pipeline-template/config.xml
 
 RUN /bin/chmod 0400 /usr/share/jenkins/ref/.ssh/id_rsa
 RUN /bin/chmod 0400 /usr/share/jenkins/ref/.ssh/id_rsa.pub
@@ -21,6 +21,7 @@ RUN /bin/chown jenkins:jenkins /usr/share/jenkins/ref/init.groovy
 RUN /bin/chown jenkins:jenkins /usr/share/jenkins/ref/plugin_config/credentials.groovy
 RUN /bin/chown jenkins:jenkins /usr/share/jenkins/ref/plugin_config/maven.groovy
 RUN /bin/chown jenkins:jenkins /usr/share/jenkins/ref/plugin_config/gitScm.groovy
+RUN /bin/chown jenkins:jenkins /usr/share/jenkins/ref/jobs/ci-pipeline-template/config.xml
 ADD node-v6.10.2-linux-x64.tar.xz /var/jenkins_home/apps/
 RUN ln -s /var/jenkins_home/apps/node-v6.10.2-linux-x64/bin/node /usr/bin/node
 RUN ln -s /var/jenkins_home/apps/node-v6.10.2-linux-x64/bin/npm /usr/bin/npm

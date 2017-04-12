@@ -23,7 +23,8 @@ durable-task:1.13
 maven-plugin:2.15.1
 javadoc:1.0
 icon-shim:2.0.3
-
+cucumber-reports:3.6.1
+htmlpublisher:1.12
 docker-commons:1.5
 docker-workflow:1.9
 
