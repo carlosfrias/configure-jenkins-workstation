@@ -16,11 +16,6 @@
           <description></description>
           <defaultValue>friasc@google.com</defaultValue>
         </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>API_DOMAIN_TEST</name>
-          <description></description>
-          <defaultValue>friasc-test.apigee.net</defaultValue>
-        </hudson.model.StringParameterDefinition>
         <hudson.model.PasswordParameterDefinition>
           <name>APIGEE_PASSWORD</name>
           <description></description>
