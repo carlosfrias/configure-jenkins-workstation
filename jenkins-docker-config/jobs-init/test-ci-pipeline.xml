@@ -19,6 +19,7 @@
         <hudson.model.PasswordParameterDefinition>
           <name>password</name>
           <description></description>
+          <defaultValue></defaultValue>
         </hudson.model.PasswordParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>deployment_suffix</name>

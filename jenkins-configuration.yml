@@ -17,3 +17,4 @@ org: 'friasc'
 username: 'friasc@google.com'
 deployment_suffix: 'jenkins_deployment'
 profile: 'test'
+container_name: rccl_jenkins
