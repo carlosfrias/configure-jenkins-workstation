@@ -2,7 +2,7 @@ FROM jenkins:2.32.2
 
 USER root
 RUN apt-get update -y
-RUN apt-get install -y tree maven git
+RUN apt-get install -y tree maven git vim
 COPY ssh/ /usr/share/jenkins/ref/.ssh
 COPY ./jenkins-init/jenkins_plugins.txt /usr/share/jenkins/ref
 COPY ./jenkins-init/init.groovy /usr/share/jenkins/ref/init.groovy
