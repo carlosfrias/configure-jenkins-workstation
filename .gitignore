@@ -2,3 +2,5 @@
 *.retry
 ssh
 *.tar.xz
+jenkins-docker-config/jobs-init/test-ci-pipeline.xml
+jenkins-docker-config/Dockerfile

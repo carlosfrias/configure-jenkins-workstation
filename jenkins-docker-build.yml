@@ -28,12 +28,11 @@
   hosts: localhost
   gather_facts: no
   connection: local
+  vars_files:
+  - ~/.apigee/credentials.yml
+  - jenkins-configuration.yml
   vars:
-    dockerfile_path: ./jenkins-docker-config
-    download_node: https://nodejs.org/dist/
-    node_version: v6.10.2
-    node_package_name: "node-{{ node_version }}-linux-x64"
-    node_archive: "{{ node_package_name }}.tar.xz"
+
   tasks:
   - name: Download node
     become: no
@@ -41,11 +40,20 @@
       url: "{{ download_node }}/{{ node_version }}/{{ node_archive }}"
       dest: "{{ dockerfile_path }}/{{ node_archive }}"
 
-  - name: Copy pipeline template
-    fetch:
-      src: pipeline-template/test-ci-pipeline.xml
-      dest: "{{ dockerfile_path }}/test-ci-pipeline.xml"
-      flat: yes
+  - name: Copy Dockerfile to configure Jenkins instance
+    template:
+      src: ./templates/Dockerfile.j2
+      dest: "{{ dockerfile_path }}/Dockerfile"
+
+  - name: Create missing job-init folder
+    file:
+      path: "{{ dockerfile_path }}/jobs-init"
+      state: directory
+
+  - name: Copy pipeline job template
+    template:
+      src: ./templates/test-ci-pipeline.xml.j2
+      dest: "{{ dockerfile_path }}/jobs-init/test-ci-pipeline.xml"
 
   - name: Build Jenkins Image
     docker_image:
