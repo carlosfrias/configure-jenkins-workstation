@@ -40,6 +40,12 @@
       url: "{{ download_node }}/{{ node_version }}/{{ node_archive }}"
       dest: "{{ dockerfile_path }}/{{ node_archive }}"
 
+  - name: Download Maven
+    become: no
+    get_url:
+      url: '{{ maven_download_url }}'
+      dest: "{{ dockerfile_path }}/{{ maven_archive }}"
+
   - name: Copy Dockerfile to configure Jenkins instance
     template:
       src: ./templates/Dockerfile.j2

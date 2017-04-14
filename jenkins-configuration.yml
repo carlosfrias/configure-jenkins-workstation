@@ -7,6 +7,11 @@ node_version: 'v6.10.2'
 node_package_name: "node-{{ node_version }}-linux-x64"
 node_archive: "{{ node_package_name }}.tar.xz"
 
+maven_download_url: http://www-eu.apache.org/dist/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz
+maven_version: 3.5.0
+maven_package_name: "apache-maven-{{ maven_version }}"
+maven_archive: "{{ maven_package_name }}-bin.tar.gz"
+
 git_url: 'git@github.com:carlosfrias/test-ci.git'
 git_name: 'carlosfrias'
 git_branch: '*/master'
