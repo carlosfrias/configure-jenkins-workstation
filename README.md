@@ -1,29 +1,18 @@
-# README #
+# Configure Jenkins Workstation
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This repository is used to help manage creating a Jenkins instance that can be configured and 
+running very quickly with the plugins and configurations that are necessary.
 
-### What is this repository for? ###
+## Usage
+* Install Docker
+* Install ansible
+* Configure Jenkins plugins list
+* Install and run Jenkins
+ 
+### Configure Jenkins Plugins 
+Review and update the `docker/jenkins-plugins.txt` to ensure your required plugins are installed.
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+### Install and Run Jenkins
+Install and run Jenkins on docker with: `ansible-playbook jenkins-build.yml -e container_name=mycontainer`
 
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+ 

@@ -1,0 +1,26 @@
+---
+- name: Teardown jenkins server
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  vars_files:
+  - jenkins-configuration.yml
+  tasks:
+  - name: Stop running instance
+    ignore_errors: yes
+    docker_container:
+      name: "{{ container_name }}"
+      state: stopped
+
+  - name: Remove running instance
+    docker_container:
+      name: "{{ container_name }}"
+      state: absent
+
+  - name: Remove existing image
+    docker_image:
+      name: "{{ container_name }}"
+      state: absent
+      force: yes
+
+

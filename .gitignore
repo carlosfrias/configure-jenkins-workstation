@@ -1,0 +1,7 @@
+*.iml
+*.retry
+ssh
+*.tar.xz
+*.tar.gz
+jenkins-docker-config/jobs-init/test-ci-pipeline.xml
+jenkins-docker-config/Dockerfile

@@ -1,0 +1,72 @@
+---
+- name: Configure an API workstations
+  hosts: localhost
+  connection: local
+  become: yes
+  vars:
+    maven_download_url: http://www-eu.apache.org/dist/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz
+    maven_version: 3.5.0
+    maven_package_name: "apache-maven-{{ maven_version }}"
+    maven_archive: "{{ maven_package_name }}-bin.tar.gz"
+
+    node_download_url: https://nodejs.org/dist/
+    node_version: v6.10.2
+    node_package_name: "node-{{ node_version }}-linux-x64"
+    node_archive: "{{ node_package_name }}.tar.xz"
+  tasks:
+  - name: Create folders
+    file:
+      path: "{{ item }}"
+      state: directory
+    with_items:
+    - "~/apps"
+    - "~/bin"
+    - "~/Downloads"
+    - "/usr/share/{{ maven_package_name }}"
+
+  - name: Download node
+    become: no
+    get_url:
+      url: "{{ node_download_url }}/{{ node_version }}/{{ node_archive }}"
+      dest: "~/apps/{{ node_archive }}"
+
+  - name: Unarchive node package
+    become: no
+    unarchive:
+      src: "~/apps/{{ node_archive }}"
+      dest: ~/apps
+      remote_src: True
+
+  - name: Update PATH with Node
+    become: no
+    lineinfile:
+      dest: "~/.bashrc"
+      line: "export PATH=$PATH:~/apps/{{ node_package_name }}/bin"
+      state: present
+
+  - name: Download Maven
+    become: no
+    get_url:
+      url: '{{ maven_download_url }}'
+      dest: ~/Downloads/{{ maven_archive }}
+
+  - name: Unarchive Maven
+    unarchive:
+      src: ~/Downloads/{{ maven_archive }}
+      dest: /usr/share/{{ maven_package_name }}
+      remote_src: True
+
+  - name: Update environment with MAVEN_HOME
+    become: no
+    lineinfile:
+      dest: "~/.bashrc"
+      line: "export MAVEN_HOME=/usr/share/{{ maven_package_name }}-bin/{{ maven_package_name }}"
+      state: present
+
+  - name: Update PATH with MAVEN_HOME
+    become: no
+    lineinfile:
+      dest: "~/.bashrc"
+      line: "export PATH=$PATH:$MAVEN_HOME/bin"
+      state: present
+
