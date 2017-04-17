@@ -3,6 +3,8 @@
   hosts: localhost
   connection: local
   gather_facts: no
+  vars_files:
+  - jenkins-configuration.yml
   tasks:
   - name: Stop running instance
     ignore_errors: yes

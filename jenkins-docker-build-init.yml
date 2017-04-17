@@ -3,6 +3,8 @@
   hosts: localhost
   gather_facts: no
   connection: local
+  vars_files:
+  - jenkins-configuration.yml
   tasks:
   - name: Install modules
     pip:
@@ -14,7 +16,7 @@
   - name: Obtain ssh credentials
     fetch:
       src: ~/.ssh/{{ item }}
-      dest: docker/ssh/{{ item }}
+      dest: "{{ dockerfile_path }}/ssh/{{ item }}"
       flat: yes
     with_items:
     - id_rsa
