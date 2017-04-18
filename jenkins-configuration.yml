@@ -1,5 +1,5 @@
 ---
-dockerfile_path: './jenkins-docker-config'
+docker_config_folder: './jenkins-docker-config'
 job_name: 'ci-pipeline-template'
 
 download_node: 'https://nodejs.org/dist/'
@@ -12,8 +12,10 @@ maven_version: 3.5.0
 maven_package_name: "apache-maven-{{ maven_version }}"
 maven_archive: "{{ maven_package_name }}-bin.tar.gz"
 
-git_url: 'git@github.com:carlosfrias/test-ci.git'
-git_name: 'carlosfrias'
+#git_url: 'git@github.com:carlosfrias/test-ci.git'
+git_url: 'git@bitbucket.org:royal-digital/apigeetest1.git'
+#git_name: 'carlosfrias'
+git_name: 'friasc'
 git_branch: '*/master'
 scm_polling_interval: '* * * * *'
 jenkins_version: '2.32.2'

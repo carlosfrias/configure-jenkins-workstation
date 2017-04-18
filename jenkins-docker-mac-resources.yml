@@ -1,0 +1,26 @@
+---
+- name: Install docker-py and copy SSH keys for Jenkins server
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+  - jenkins-configuration.yml
+  tasks:
+  - name: Install modules
+    become: yes
+    pip:
+      name: "{{ item }}"
+      state: present
+    with_items:
+    - docker-py
+
+  - name: Obtain ssh credentials
+    fetch:
+      src: ~/.ssh/{{ item }}
+      dest: "{{ docker_config_folder }}/ssh/{{ item }}"
+      flat: yes
+    with_items:
+    - id_rsa
+    - id_rsa.pub
+    - known_hosts
+

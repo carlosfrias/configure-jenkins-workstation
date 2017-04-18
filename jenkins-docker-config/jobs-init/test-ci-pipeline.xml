@@ -47,8 +47,8 @@
       <configVersion>2</configVersion>
       <userRemoteConfigs>
         <hudson.plugins.git.UserRemoteConfig>
-          <url>git@github.com:carlosfrias/test-ci.git</url>
-          <credentialsId>carlosfrias</credentialsId>
+          <url>git@bitbucket.org:royal-digital/apigeetest1.git</url>
+          <credentialsId>friasc</credentialsId>
         </hudson.plugins.git.UserRemoteConfig>
       </userRemoteConfigs>
       <branches>
