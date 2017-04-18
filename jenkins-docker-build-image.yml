@@ -37,7 +37,7 @@
   - name: Copy maven config file
     template:
       src: ./templates/maven.groovy.j2
-      dest: "{{ docker_config_folder }}/jenkins-init/maven.groovy
+      dest: "{{ docker_config_folder }}/jenkins-init/maven.groovy"
 
   - name: Build Jenkins Image
     docker_image:
