@@ -34,6 +34,11 @@
       src: ./templates/test-ci-pipeline.xml.j2
       dest: "{{ docker_config_folder }}/jobs-init/test-ci-pipeline.xml"
 
+  - name: Copy maven config file
+    template:
+      src: ./templates/maven.groovy.j2
+      dest: "{{ docker_config_folder }}/jenkins-init/maven.groovy
+
   - name: Build Jenkins Image
     docker_image:
       name: "{{ container_name }}"

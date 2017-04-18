@@ -5,3 +5,4 @@ ssh
 *.tar.gz
 jenkins-docker-config/jobs-init/test-ci-pipeline.xml
 jenkins-docker-config/Dockerfile
+jenkins-docker-config/jenkins-int/maven.groovy
