@@ -27,7 +27,7 @@ cucumber-reports:3.6.1
 htmlpublisher:1.12
 docker-commons:1.5
 docker-workflow:1.9
-config-file-provider:2.15.5
+config-file-provider:2.15.6
 
 branch-api:2.0.8
 cloudbees-folder:6.0.1
