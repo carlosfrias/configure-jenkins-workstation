@@ -25,9 +25,9 @@ RUN /bin/chown jenkins:jenkins /usr/share/jenkins/ref/jobs/{{ job_name }}/config
 ADD node-v6.10.2-linux-x64.tar.xz /var/jenkins_home/apps/
 RUN ln -s /var/jenkins_home/apps/node-v6.10.2-linux-x64/bin/node /usr/bin/node
 RUN ln -s /var/jenkins_home/apps/node-v6.10.2-linux-x64/bin/npm /usr/bin/npm
-ADD apache-maven-3.5.0-bin.tar.gz /usr/share/maven
-RUN ln -s /usr/share/maven/apache-maven-3.5.0/bin/mvn /usr/bin/mvn
-ENV MAVEN_HOME=/usr/share/maven/apache-maven-3.5.0
+ADD apache-maven-{{ maven_version }}-bin.tar.gz /usr/share/maven
+RUN ln -s /usr/share/maven/apache-maven-{{ maven_version }}/bin/mvn /usr/bin/mvn
+ENV MAVEN_HOME=/usr/share/maven/apache-maven-{{ maven_version }}
 ENV PATH=$PATH:$MAVEN_HOME/bin
 RUN /bin/chown -R jenkins:jenkins /var/jenkins_home
 RUN /bin/chown -R jenkins:jenkins /var/jenkins_home/apps
