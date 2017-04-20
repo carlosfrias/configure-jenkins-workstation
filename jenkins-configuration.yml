@@ -13,10 +13,6 @@ maven_download_url: http://www-eu.apache.org/dist/maven/maven-3/{{ maven_version
 maven_package_name: "apache-maven-{{ maven_version }}"
 maven_archive: "{{ maven_package_name }}-bin.tar.gz"
 
-#git_url: 'git@github.com:carlosfrias/test-ci.git'
-git_url: 'git@bitbucket.org:royal-digital/apigeetest1.git'
-#git_name: 'carlosfrias'
-git_name: 'friasc'
 git_branch: '*/master'
 scm_polling_interval: '* * * * *'
 jenkins_version: '2.32.2'

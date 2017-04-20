@@ -1,14 +1,15 @@
 # Configure Jenkins Workstation
 
 This repository is used to help manage creating a Jenkins instance that can be configured and 
-running very quickly with the plugins and configurations that are necessary.
+ready for local development.
 
 ## Usage Overview
 
-We need to configure your workstation to work with Docker and Ansible. We then use Ansible
+We need to configure your workstation with Docker and Ansible. We then use Ansible
 to build the Jenkins infrastructure that will be provisioned with Docker. The top level steps to 
 follow: 
 
+* Create SSH key pair
 * Install Docker
 * Install Ansible
 * Configure Jenkins plugins list
