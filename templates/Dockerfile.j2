@@ -8,6 +8,7 @@ COPY ./jenkins-init/jenkins_plugins.txt /usr/share/jenkins/ref
 COPY ./jenkins-init/init.groovy /usr/share/jenkins/ref/init.groovy
 COPY ./jenkins-init/credentials.groovy /usr/share/jenkins/ref/plugin_config/credentials.groovy
 COPY ./jenkins-init/maven.groovy /usr/share/jenkins/ref/plugin_config/maven.groovy
+COPY ./jenkins-init/nodejs.groovy /usr/share/jenkins/ref/plugin_config/nodejs.groovy
 COPY ./jenkins-init/gitScm.groovy /usr/share/jenkins/ref/plugin_config/gitScm.groovy
 COPY ./jobs-init/test-ci-pipeline.xml /usr/share/jenkins/ref/jobs/{{ job_name }}/config.xml
 
@@ -20,6 +21,7 @@ RUN /bin/chown jenkins:jenkins /usr/share/jenkins/ref/jenkins_plugins.txt
 RUN /bin/chown jenkins:jenkins /usr/share/jenkins/ref/init.groovy
 RUN /bin/chown jenkins:jenkins /usr/share/jenkins/ref/plugin_config/credentials.groovy
 RUN /bin/chown jenkins:jenkins /usr/share/jenkins/ref/plugin_config/maven.groovy
+RUN /bin/chown jenkins:jenkins /usr/share/jenkins/ref/plugin_config/nodejs.groovy
 RUN /bin/chown jenkins:jenkins /usr/share/jenkins/ref/plugin_config/gitScm.groovy
 RUN /bin/chown jenkins:jenkins /usr/share/jenkins/ref/jobs/{{ job_name }}/config.xml
 ADD node-v6.10.2-linux-x64.tar.xz /var/jenkins_home/apps/

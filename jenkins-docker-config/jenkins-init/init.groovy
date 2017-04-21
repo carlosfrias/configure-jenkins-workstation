@@ -18,3 +18,11 @@ if(maven.exists()) {
     evaluate(maven)
     println "INIT: Maven Configuration Loaded."
 }
+
+node = new File("${System.env.JENKINS_HOME}/plugin_config/nodejs.groovy")
+if(node.exists()) {
+    println "INIT: Loading NodeJS Configuration..."
+    evaluate(node)
+    println "INIT: Maven NodeJS Loaded."
+}
+

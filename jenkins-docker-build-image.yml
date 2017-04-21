@@ -10,7 +10,7 @@
   - name: Download node
     become: no
     get_url:
-      url: "{{ download_node }}/{{ node_version }}/{{ node_archive }}"
+      url: "{{ download_node }}/v{{ node_version }}/{{ node_archive }}"
       dest: "{{ docker_config_folder }}/{{ node_archive }}"
 
   - name: Download Maven
@@ -34,10 +34,15 @@
       src: ./templates/test-ci-pipeline.xml.j2
       dest: "{{ docker_config_folder }}/jobs-init/test-ci-pipeline.xml"
 
-  - name: Copy maven config file
+  - name: Copy maven config
     template:
       src: ./templates/maven.groovy.j2
       dest: "{{ docker_config_folder }}/jenkins-init/maven.groovy"
+
+  - name: Copy nodejs config
+    template:
+      src: ./templates/nodejs.groovy.j2
+      dest: "{{ docker_config_folder }}/jenkins-init/nodejs.groovy"
 
   - name: Build Jenkins Image
     docker_image:

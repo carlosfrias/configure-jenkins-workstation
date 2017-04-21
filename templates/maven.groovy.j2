@@ -5,7 +5,7 @@ import jenkins.model.*
 
 configPrefixMessage = "CUSTOM CONFIGURATION"
 
-println "$configPrefixMessage: Configuring Maven 3..."
+println "$configPrefixMessage: Configuring Maven..."
 descriptor = Jenkins.instance.getDescriptorByType(Maven.DescriptorImpl.class)
 if(!descriptor.installations.size()) {
     println "$configPrefixMessage: Creating a Maven Configuration..."

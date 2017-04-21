@@ -3,8 +3,8 @@ docker_config_folder: './jenkins-docker-config'
 job_name: 'ci-pipeline-template'
 
 download_node: 'https://nodejs.org/dist/'
-node_version: 'v6.10.2'
-node_package_name: "node-{{ node_version }}-linux-x64"
+node_version: '6.10.2'
+node_package_name: "node-v{{ node_version }}-linux-x64"
 node_archive: "{{ node_package_name }}.tar.xz"
 
 #maven_version: 3.5.0
