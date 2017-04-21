@@ -22,12 +22,12 @@ Use ssh to create a key pair. Open a terminal and invoke ```ssh-keygen``` accept
 parameters for test purposes.
 
 ### Install Docker
-Install Docker for your platform following the installation instructions provided by Docker 
-at https://docs.docker.com/engine/installation.
+Install Docker for your platform following the installation instructions provided by 
+[Docker](https://docs.docker.com/engine/installation).
 
 ### Install Ansible
-Install Ansible for your platform following the installation instructions provided by Ansible
-at http://docs.ansible.com/ansible/intro_installation.html.
+Install Ansible for your platform following the installation instructions provided by 
+[Ansible](http://docs.ansible.com/ansible/intro_installation.html).
  
 ### Configure Jenkins Plugins 
 You can have Jenkins plugins installed when the Docker image is constructed. Review and update 
