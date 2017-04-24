@@ -20,5 +20,5 @@ jenkins_version: '2.32.2'
 org: 'friasc'
 username: 'friasc@google.com'
 deployment_suffix: 'jenkins_deployment'
-profile: 'test'
+profile: 'local'
 container_name: rccl_jenkins
