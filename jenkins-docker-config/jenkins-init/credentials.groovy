@@ -10,7 +10,7 @@ systemCredProvider = SystemCredentialsProvider.instance
 println "$configPrefixMessage: Creating usernamePasswordCredentials..."
 credentialsImpl = new UsernamePasswordCredentialsImpl(CredentialsScope.GLOBAL,
         System.env.GIT_NAME,
-        'Carlos Frias Credentials',
+        'Github Credentials',
         System.env.GIT_EMAIL,
         System.env.GIT_PASSWORD)
 
