@@ -7,6 +7,13 @@
     - name: 'reboot'
       prompt: "You will need a reboot, do you want to reboot at the end of this script? (y/n)"
   tasks:
+ - name: Install modules
+    pip:
+      name: "{{ item }}"
+      state: present
+    with_items:
+    - docker-py
+
   - name: Install packages with apt
     apt:
       name: "{{ item }}"

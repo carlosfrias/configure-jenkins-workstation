@@ -6,14 +6,6 @@
   vars_files:
   - jenkins-configuration.yml
   tasks:
-  - name: Install modules
-    become: yes
-    pip:
-      name: "{{ item }}"
-      state: present
-    with_items:
-    - docker-py
-
   - name: Obtain ssh credentials
     fetch:
       src: ~/.ssh/{{ item }}
@@ -23,4 +15,3 @@
     - id_rsa
     - id_rsa.pub
     - known_hosts
-
