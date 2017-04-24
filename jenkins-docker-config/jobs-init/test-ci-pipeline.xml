@@ -29,7 +29,7 @@
         <hudson.model.StringParameterDefinition>
           <name>profile</name>
           <description></description>
-          <defaultValue>test</defaultValue>
+          <defaultValue>local</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
