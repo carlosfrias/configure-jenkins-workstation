@@ -1,15 +1,6 @@
 ---
-- name: Install docker-py and copy SSH keys for Jenkins server
-  include: jenkins-docker-mac-resources.yml
-
-- name: Clear a running instance and old images
-  include: jenkins-docker-teardown.yml
-
 - name: Build Jenkins Container
   include: jenkins-docker-build-image.yml
 
 - name: Run Jenkins Container
   include: jenkins-docker-run.yml
-
-- name: Retrieve initial admin password
-  include: jenkins-docker-initial-password.yml
