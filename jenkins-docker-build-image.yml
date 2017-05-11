@@ -7,56 +7,49 @@
   - ~/.apigee/credentials.yml
   - jenkins-configuration.yml
   tasks:
+  - name: Set username
+    shell: whoami
+    register: ansible_user
+    when: ansible_user is not defined
+
   - name: Download node
     become: no
     get_url:
+      force: yes
       url: "{{ download_node }}/v{{ node_version }}/{{ node_archive }}"
       dest: "{{ docker_config_folder }}/{{ node_archive }}"
-      owner: "{{ ansible_user }}"
-      group: "eng"
 
   - name: Download Maven
     become: no
     get_url:
+      force: yes
       url: '{{ maven_download_url }}'
       dest: "{{ docker_config_folder }}/{{ maven_archive }}"
-      owner: "{{ ansible_user }}"
-      group: "eng"
 
   - name: Copy Dockerfile to configure Jenkins instance
     template:
-      src: ./templates/Dockerfile.j2
+      src: templates/Dockerfile.j2
       dest: "{{ docker_config_folder }}/Dockerfile"
-      owner: "{{ ansible_user }}"
-      group: "eng"
 
   - name: Create missing job-init folder
     file:
       path: "{{ docker_config_folder }}/jobs-init"
       state: directory
-      owner: "{{ ansible_user }}"
-      group: "eng"
 
   - name: Copy pipeline job template
     template:
       src: ./templates/test-ci-pipeline.xml.j2
       dest: "{{ docker_config_folder }}/jobs-init/test-ci-pipeline.xml"
-      owner: "{{ ansible_user }}"
-      group: "eng"
 
   - name: Copy maven config
     template:
       src: ./templates/maven.groovy.j2
       dest: "{{ docker_config_folder }}/jenkins-init/maven.groovy"
-      owner: "{{ ansible_user }}"
-      group: "eng"
 
   - name: Copy nodejs config
     template:
       src: ./templates/nodejs.groovy.j2
       dest: "{{ docker_config_folder }}/jenkins-init/nodejs.groovy"
-      owner: "{{ ansible_user }}"
-      group: "eng"
 
   - name: Remove existing Jenkins Image
     docker_image:

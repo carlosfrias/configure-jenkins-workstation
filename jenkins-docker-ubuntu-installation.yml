@@ -2,12 +2,13 @@
 - name: Configure an API workstations
   hosts: localhost
   connection: local
+  gather_facts: no
   become: yes
   vars_prompt:
     - name: 'reboot'
       prompt: "You will need a reboot, do you want to reboot at the end of this script? (y/n)"
   tasks:
- - name: Install modules
+  - name: Install modules
     pip:
       name: "{{ item }}"
       state: present

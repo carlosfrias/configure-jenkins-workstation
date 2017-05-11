@@ -12,8 +12,6 @@
       path: jenkins_home
       state: "directory"
       mode: 0755
-      owner: "{{ ansible_user }}"
-      group: "eng"
 
 #  - name: Jenkins data volume
 #    docker_container:
