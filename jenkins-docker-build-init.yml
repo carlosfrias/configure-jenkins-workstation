@@ -1,4 +1,7 @@
 ---
+- name: Install docker-py and copy SSH keys for Jenkins server
+  include: jenkins-docker-mac-resources.yml
+  
 - name: Build Jenkins Container
   include: jenkins-docker-build-image.yml
 
