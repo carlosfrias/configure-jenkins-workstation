@@ -10,7 +10,7 @@ println "$configPrefixMessage: Configuring NodeJS..."
 descriptor = Jenkins.instance.getDescriptorByType(NodeJSInstallation.DescriptorImpl.class)
 if(!descriptor.installations.size()) {
     println "$configPrefixMessage: Creating a NodeJS Configuration..."
-    installation = new NodeJSInstallation('NodeJS {{ node_version }}', null, null, Platform.LINUX)
+    installation = new NodeJSInstallation('NodeJS', null, null, Platform.LINUX)
     descriptor.installations = [ installation ]
     descriptor.save()
     println "$configPrefixMessage: Saved NodeJS configuration."

@@ -9,7 +9,7 @@ println "$configPrefixMessage: Configuring Maven..."
 descriptor = Jenkins.instance.getDescriptorByType(Maven.DescriptorImpl.class)
 if(!descriptor.installations.size()) {
     println "$configPrefixMessage: Creating a Maven Configuration..."
-    installation = new Maven.MavenInstallation("Maven {{ maven_version }}", "/usr/share/maven/apache-maven-{{ maven_version }}", null)
+    installation = new Maven.MavenInstallation("Maven", "/usr/share/maven/apache-maven-{{ maven_version }}", null)
     descriptor.installations = [ installation ]
     descriptor.save()
     println "$configPrefixMessage: Saved Maven configuration."

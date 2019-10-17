@@ -7,22 +7,6 @@
   - ~/.apigee/credentials.yml
   - jenkins-configuration.yml
   tasks:
-  - name: Create host jenkins_home folder
-    file:
-      path: jenkins_home
-      state: "directory"
-      mode: 0755
-      owner: "{{ ansible_user }}"
-      group: "eng"
-
-#  - name: Jenkins data volume
-#    docker_container:
-#      name: "{{ container_name }}_data"
-#      image: "jenkins:{{ jenkins_version }}"
-#      state: present
-#      volumes:
-#      - "/var/jenkins_home"
-
   - name: Run Jenkins Container
     docker_container:
       name: "{{ container_name }}"
